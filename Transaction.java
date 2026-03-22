@@ -1,6 +1,8 @@
 public abstract class Transaction 
 {
-    void execute()
+    protected String transactionID;
+    protected double amount;
+    public void execute(Account acc)
     {
 
     }
