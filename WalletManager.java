@@ -1,3 +1,4 @@
-public class WalletManager {
+public class WalletManager 
+{
     
 }

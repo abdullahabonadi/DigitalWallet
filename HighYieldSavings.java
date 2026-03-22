@@ -1,3 +1,8 @@
-public class HighYieldSavings extends SavingsAccount {
-    
+public class HighYieldSavings extends SavingsAccount implements Taxable 
+{
+    @Override
+    public void calculateTax()
+    {
+
+    }
 }
