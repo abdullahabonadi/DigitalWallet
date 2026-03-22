@@ -1,7 +1,7 @@
 public abstract class Account 
 //Abstract Superclass.
 {
-    protected String acountId;
+    protected String accountId;
     protected double balance;
     protected Date dateOpened;
     public Account(String id, double bal, Date d){
