@@ -10,6 +10,7 @@ public class SavingsAccount extends Account
         double interest = getBalance() * this.interestRate;
         setBalance(getBalance() + interest);
     }
+    @Override
     public String toString(){
         return super.toString() + " | Interest Rate: " + (this.interestRate * 100) + "%";
     }

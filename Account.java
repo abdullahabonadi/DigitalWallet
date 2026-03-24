@@ -28,6 +28,6 @@ public abstract class Account
     @Override
     public String toString()
     {
-        return "Account ID: " + this.accountId + " | Balance: " + getBalance();
+        return "Account ID: " + this.accountId + " | Balance: " + getBalance()+ " | Opened: " + dateOpened;
     }
 }

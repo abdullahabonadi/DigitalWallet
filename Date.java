@@ -12,6 +12,6 @@ public Date(int d, int m, int y)
     this.year = y;
 }
 public String toString(){
-    return "abc";
+    return day + "/" + month + "/" + year;
 }
 }

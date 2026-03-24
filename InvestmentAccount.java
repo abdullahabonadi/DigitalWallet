@@ -9,13 +9,18 @@ private int riskLevel;
     }
 public void adjustPortfolio(String newPortfolio)
 {
+    this.stockPortfolio = newPortfolio;
+}
 
+public void applyMarketChange(double percent){
+    double change = getBalance() * percent;
+    setBalance(getBalance() + change);
 }
 @Override
 
 public String toString()
 {
-    return "abc";
+    return super.toString() + " | Portfolio: " + stockPortfolio + " | Risk Level: " + riskLevel;
 }
 
 }
