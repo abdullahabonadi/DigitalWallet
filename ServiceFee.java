@@ -9,10 +9,6 @@ public class ServiceFee implements Taxable {
     
     public double calculateTax()
     {
-        return 1.0; 
-    }
-    public String toString()
-    {
-        return "abc";
+        return amount * 0.15; 
     }
 }

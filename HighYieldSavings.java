@@ -10,6 +10,15 @@ public class HighYieldSavings extends SavingsAccount implements Taxable
     @Override
     public double calculateTax()
     {
-        return 1.0;
+        if((getBalance() > minimumBalance)){
+            return getBalance() * 0.05;
+        }
+
+        else 
+            return 0;
+    }
+    @Override
+    public String toString() {
+        return super.toString() + " | Min Balance: " + minimumBalance;
     }
 }
