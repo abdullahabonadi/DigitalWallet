@@ -62,6 +62,14 @@ public class WalletTester {
                                     }
                                 }else
                                     System.out.println("Invalid input.");
+                            }else {
+                                Date today = new Date(2, 4, 2026);
+                                SavingsAccount newAcc = new SavingsAccount(id, bal, today);
+                                if (wallet.addAccount(newAcc)) {
+                                    System.out.println("Success! Account " + id + " has been added.");
+                                } else {
+                                    System.out.println("Error: Wallet capacity is full.");
+                                }
                             }
 
                             break;
@@ -72,6 +80,7 @@ public class WalletTester {
                             String id = scanner.nextLine();
                             System.out.print("Enter Initial Balance: ");
                             double bal = scanner.nextDouble();
+                            scanner.nextLine();
                             System.out.print("Enter Stock Portfolio Description: ");
                             String portfolio = scanner.nextLine();
                             System.out.print("Enter Risk Level (1-5): ");
@@ -225,8 +234,8 @@ public class WalletTester {
                             ((SavingsAccount)accountToAction).applyInterest();
                             System.out.println("interest applied\nnew balance : "+ accountToAction.getBalance());
                         }
-                        }
-                         else {
+                    }
+                    else {
                         System.out.println("\nAccount not found in the wallet.");
                     }
                     break;
@@ -257,7 +266,7 @@ public class WalletTester {
 
 
                 default:
-                    System.out.println("Invalid input. Please select a number from 1 to 5.");
+                    System.out.println("Invalid input. Please select a number from 1 to 7.");
             }
         } while (choice != 7);
 
