@@ -54,4 +54,16 @@ public class WalletManager {
             System.out.println(accounts[i].toString());
         }
     }
+
+    public void displayIDsOnly(){
+        if(count == 0){
+            System.out.println("The wallet is currently empty.");
+            return;
+        }
+        for (int i = 0; i < count; i++) {
+            System.out.println("Account: "+accounts[i].getAccountId());
+        }
+    }
+
+
 }

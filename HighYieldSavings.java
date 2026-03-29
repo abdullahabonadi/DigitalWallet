@@ -2,8 +2,8 @@ public class HighYieldSavings extends SavingsAccount implements Taxable
 {
     private double minimumBalance;
 
-    public HighYieldSavings(String id, double bal, Date d, double rate,double min) {
-        super(id, bal, d, rate);
+    public HighYieldSavings(String id, double bal, Date d,double min) {
+        super(id, bal, d);
         this.minimumBalance = min;
     }
 
@@ -11,7 +11,8 @@ public class HighYieldSavings extends SavingsAccount implements Taxable
     public double calculateTax()
     {
         if((getBalance() > minimumBalance)){
-            return getBalance() * 0.05;
+            setBalance(getBalance() - (getBalance() * 0.05));
+            return getBalance();
         }
 
         else 
