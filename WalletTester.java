@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+//main
 public class WalletTester {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -23,12 +23,13 @@ public class WalletTester {
 
 
 
-
+            //main menu
             switch (choice) {
                 case 1:
                     System.out.print("Enter Account type\n1.Savings Account\n2.Investment Account\nChoose:");
                     int type = scanner.nextInt();
                     scanner.nextLine();
+                    //account creating menu
                     switch (type){
                         //case 1 creates a SavingsAccount account
                         case 1:{
@@ -122,7 +123,7 @@ public class WalletTester {
                         System.out.println("Enter type of transaction\n1. Deposit\n2. Withdrawal\n3. transfer");
                         int typeOfTransaction = scanner.nextInt();
                         scanner.nextLine();
-
+                        //financial operations and transactions menu
                         switch (typeOfTransaction){
                             //deposit
                             case 1:
@@ -200,6 +201,7 @@ public class WalletTester {
                             System.out.println("1. adjust Portfolio\n2.apply Market Change");
                             int checkChoice = scanner.nextInt();
                             scanner.nextLine();
+                            //checks account type and makes the necessary methods
                             switch (checkChoice){
                                 case 1:
                                     System.out.println("new stock Portfolio: ");

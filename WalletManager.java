@@ -1,4 +1,5 @@
 public class WalletManager {
+    //(Aggregation).
     private Account[] accounts;
     private int count;
 

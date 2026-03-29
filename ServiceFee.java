@@ -1,4 +1,5 @@
 public class ServiceFee implements Taxable {
+    //class for adding service fees
     private String feeName;
     private double amount;
     public ServiceFee(String name, double amt)

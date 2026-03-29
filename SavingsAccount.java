@@ -1,4 +1,5 @@
-public class SavingsAccount extends Account 
+public class SavingsAccount extends Account
+    //Level 1 Supclass a standard savings account with interest.
 {
     private double interestRate;
     public SavingsAccount(String id, double bal, Date d) {

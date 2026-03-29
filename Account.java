@@ -1,5 +1,5 @@
 public abstract class Account 
-//Abstract Superclass.
+//Abstract Superclass for all wallet types.
 {
     protected String accountId;
     protected double balance;
@@ -21,9 +21,7 @@ public abstract class Account
     public String getAccountId() {
         return accountId;
     }
-    public Date getDateOpened() {
-        return dateOpened;
-    }
+
 
     @Override
     public String toString()

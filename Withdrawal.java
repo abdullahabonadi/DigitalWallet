@@ -1,9 +1,10 @@
-public class Withdrawal extends Transaction 
+public class Withdrawal extends Transaction
+        //Level 1 Supclass for financial operations
 {
     public Withdrawal(String id, double amount){
         super(id, amount);
     }
-
+    //logic for withdrawing funds with a balance checking
     public void execute(Account acc)
     {
         if(acc.getBalance() >= amount)

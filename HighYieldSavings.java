@@ -1,4 +1,5 @@
-public class HighYieldSavings extends SavingsAccount implements Taxable 
+public class HighYieldSavings extends SavingsAccount implements Taxable
+    //Level 2 Subclass for high yielding accounts.
 {
     private double minimumBalance;
 
