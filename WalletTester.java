@@ -81,7 +81,7 @@ public class WalletTester {
                             System.out.print("Enter Initial Balance: ");
                             double bal = scanner.nextDouble();
                             scanner.nextLine();
-                            System.out.print("choose a Stock Portfolio Description." +
+                            System.out.print("choose a Stock Portfolio." +
                                     "\n1. Saudi Aramco (level 1 Risk)" +
                                     "\n2. Al Rajhi Bank (level 2 Risk)" +
                                     "\n3. Amazon (level 3 Risk)" +
@@ -104,7 +104,7 @@ public class WalletTester {
                             }
                             //same day as the deadLine
                             Date today = new Date(2, 4, 2026);
-                            InvestmentAccount newAcc = new InvestmentAccount(id, bal, today, portfolio, risk);
+                            InvestmentAccount newAcc = new InvestmentAccount(id, bal, today, portfolioChoice);
                             if (wallet.addAccount(newAcc)) {
                                 System.out.println("Success! Account " + id + " has been added.");
                             } else {
@@ -165,14 +165,9 @@ public class WalletTester {
                             case 2:
                                 System.out.print("Enter the amount to withdrawal:");
                                 int amountToWithdrawal = scanner.nextInt();
-                                if(amountToWithdrawal <= accountToTransact.getBalance()) {
-                                    scanner.nextLine();
-                                    Withdrawal withdrawalTransaction = new Withdrawal(accountToTransact.getAccountId(), amountToWithdrawal);
-                                    withdrawalTransaction.execute(accountToTransact);
-                                    System.out.println("Your New Balance: " + accountToTransact.getBalance());
-                                }
-                                else
-                                    System.out.println("Sorry! not enough funds for this transaction");
+                                scanner.nextLine();
+                                Withdrawal withdrawalTransaction = new Withdrawal(accountToTransact.getAccountId(), amountToWithdrawal);
+                                withdrawalTransaction.execute(accountToTransact);
                                 break;
 
                             //transfer
@@ -224,14 +219,33 @@ public class WalletTester {
                     Account accountToAction = wallet.searchAccount(actionId, 0);
                     if (accountToAction != null) {
                         if(accountToAction instanceof InvestmentAccount){
-                            System.out.println("1. adjust Portfolio\n2.apply Market Change");
+                            System.out.println("1. adjust Portfolio\n2. apply Market Change");
                             int checkChoice = scanner.nextInt();
                             scanner.nextLine();
                             //checks account type and makes the necessary methods
                             switch (checkChoice){
                                 case 1:
-                                    System.out.println("new stock Portfolio: ");
-                                    String newPortfolio = scanner.nextLine();
+                                    System.out.print("choose a new Stock Portfolio." +
+                                            "\n1. Saudi Aramco (level 1 Risk)" +
+                                            "\n2. Al Rajhi Bank (level 2 Risk)" +
+                                            "\n3. Amazon (level 3 Risk)" +
+                                            "\n4. Microsoft (level 4 Risk)" +
+                                            "\n5. Tesla (level 5 Risk)" +
+                                            "\nChoice:");
+                                    int portfolio = scanner.nextInt();
+                                    scanner.nextLine();
+                                    String newPortfolio = "";
+                                    //portfolio and risk choice
+                                    switch(portfolio){
+                                        case 1: newPortfolio = "Saudi Aramco"; break;
+                                        case 2: newPortfolio = "Al Rajhi Bank"; break;
+                                        case 3: newPortfolio = "Amazon"; break;
+                                        case 4: newPortfolio = "Microsoft"; break;
+                                        case 5: newPortfolio = "Tesla"; break;
+                                        default:
+                                            System.out.println("Invalid input. safety protocol (risk level set as 1)");
+                                            newPortfolio = "Saudi Aramco"; break;
+                                    }
                                     ((InvestmentAccount)accountToAction).adjustPortfolio(newPortfolio);
                                     break;
                                 case 2:
