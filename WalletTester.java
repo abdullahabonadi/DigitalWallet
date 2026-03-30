@@ -217,7 +217,7 @@ public class WalletTester {
 
                     }
                     break;
-
+                //case for making actions to the accounts
                 case 4:
                     System.out.println("Enter the Account ID to make an action:");
                     String actionId = scanner.nextLine();
