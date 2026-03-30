@@ -11,6 +11,7 @@ public class Withdrawal extends Transaction
         {
             acc.setBalance(acc.getBalance() - amount);
             System.out.println("Transaction " + transactionID + ": Withdrew " + amount);
+            System.out.println("Your New Balance: " + acc.getBalance());
         }
         else 
             System.out.println("Transaction " + transactionID + ": Failed. Insufficient funds.");
