@@ -81,10 +81,27 @@ public class WalletTester {
                             System.out.print("Enter Initial Balance: ");
                             double bal = scanner.nextDouble();
                             scanner.nextLine();
-                            System.out.print("Enter Stock Portfolio Description: ");
-                            String portfolio = scanner.nextLine();
-                            System.out.print("Enter Risk Level (1-5): ");
-                            int risk = scanner.nextInt();
+                            System.out.print("choose a Stock Portfolio Description." +
+                                    "\n1. Saudi Aramco (level 1 Risk)" +
+                                    "\n2. Al Rajhi Bank (level 2 Risk)" +
+                                    "\n3. Amazon (level 3 Risk)" +
+                                    "\n4. Microsoft (level 4 Risk)" +
+                                    "\n5. Tesla (level 5 Risk)" +
+                                    "\nChoice:");
+                            int portfolio = scanner.nextInt();
+                            scanner.nextLine();
+                            String portfolioChoice = "";
+                            //portfolio and risk choice
+                            switch(portfolio){
+                                case 1: portfolioChoice = "Saudi Aramco"; break;
+                                case 2: portfolioChoice = "Al Rajhi Bank"; break;
+                                case 3: portfolioChoice = "Amazon"; break;
+                                case 4: portfolioChoice = "Microsoft"; break;
+                                case 5: portfolioChoice = "Tesla"; break;
+                                default:
+                                    System.out.println("Invalid input. safety protocol (risk level set as 1)");
+                                    portfolioChoice = "Saudi Aramco"; break;
+                            }
                             //same day as the deadLine
                             Date today = new Date(2, 4, 2026);
                             InvestmentAccount newAcc = new InvestmentAccount(id, bal, today, portfolio, risk);
