@@ -3,8 +3,8 @@ public abstract class Transaction
 {
     protected String transactionID;
     protected double amount;
-public Transaction(String transactionID, double amount){
-    this.transactionID = transactionID;
+public Transaction(String Id, double amount){
+    this.transactionID = Id;
     this.amount = amount;
 }
     // Abstract method

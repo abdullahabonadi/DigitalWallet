@@ -52,7 +52,7 @@ public class WalletManager {
             return;
         }
         for (int i = 0; i < count; i++) {
-            System.out.println(accounts[i].toString());
+            System.out.println(accounts[i]);
         }
     }
 
