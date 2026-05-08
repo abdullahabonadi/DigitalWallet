@@ -48,8 +48,8 @@ public class WalletManager implements Serializable{
         if (current.getAccountId().equals(id)) {
             return current;
         }
-        // Recursive step: Call the method again, moving to the next index
-        return searchAccount(id, index + 1);
+        //move to the next account in the chain
+        return searchAccount(id, current.next);
     }
 
     public void displayAll() {
