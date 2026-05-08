@@ -14,6 +14,9 @@ public class WalletManager implements Serializable{
         head = acc;
         return true;
     }
+    public Account getHead() {
+        return head;
+    }
 
     public boolean removeAccount(String id) {
         for (int i = 0; i < count; i++) {
