@@ -57,8 +57,10 @@ public class WalletManager implements Serializable{
             System.out.println("The wallet is currently empty.");
             return;
         }
-        for (int i = 0; i < count; i++) {
-            System.out.println(accounts[i]);
+        Account curr = head;
+        while (curr != null) {
+            System.out.println(curr.toString());
+            curr = curr.next; // move to next
         }
     }
 
