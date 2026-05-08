@@ -305,6 +305,7 @@ public class WalletTester {
                     break;
                 //leaves program
                 case 7:
+                    fileManager.saveWallet(wallet); // saving data
                     System.out.println("Exiting Digital Wallet... Goodbye!");
                     break;
 
