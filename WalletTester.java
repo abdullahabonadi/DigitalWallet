@@ -154,7 +154,7 @@ public class WalletTester {
                     wallet.displayIDsOnly();
                     System.out.print("Enter the account Id to transact:");
                     String id = scanner.nextLine();
-                    Account accountToTransact = wallet.searchAccount(id, 0);
+                    Account accountToTransact = wallet.searchAccount(id, wallet.getHead());
                     if(accountToTransact == null){
                         System.out.println("No account has that Id!");
                     }
