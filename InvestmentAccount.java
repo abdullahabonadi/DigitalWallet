@@ -1,4 +1,6 @@
-public class InvestmentAccount extends Account
+import java.io.Serializable;
+
+public class InvestmentAccount extends Account implements Serializable
         //Level 1 Supclass an investment account with risk.
 {
 private String stockPortfolio;
