@@ -18,7 +18,6 @@ public class WalletTester {
                 wallet = new WalletManager();
         }
         int choice;
-
         do {
             System.out.println("\n=== Digital Wallet Management System ===");
             System.out.println("1. Add a new Account");
