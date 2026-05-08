@@ -229,7 +229,7 @@ public class WalletTester {
                 case 4:
                     System.out.println("Enter the Account ID to make an action:");
                     String actionId = scanner.nextLine();
-                    Account accountToAction = wallet.searchAccount(actionId, 0);
+                    Account accountToAction = wallet.searchAccount(actionId, wallet.getHead());
                     if (accountToAction != null) {
                         if(accountToAction instanceof InvestmentAccount){
                             System.out.println("1. adjust Portfolio\n2. apply Market Change");
