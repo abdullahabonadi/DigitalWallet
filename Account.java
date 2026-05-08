@@ -5,10 +5,12 @@ public abstract class Account implements Serializable
     protected String accountId;
     protected double balance;
     protected Date dateOpened;
+    public Account next;
     public Account(String id, double bal, Date d){
         this.accountId = id;
         this.balance = bal;
         this.dateOpened = d;
+        this.next = null;
     }
 //setters and getters
     public double getBalance()
