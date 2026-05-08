@@ -54,22 +54,17 @@ public class DashboardFrame extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 StringBuilder sb = new StringBuilder("<html>");
                 int colorIndex = offset;
-                
                 for (char c : text.toCharArray()) {
-                    if (c == ' ') {
-                        sb.append(" ");
-                    } else {
+                    if (c == ' ') sb.append(" ");
+                    else {
                         sb.append("<font color='").append(colors[colorIndex % colors.length]).append("'>").append(c).append("</font>");
                         colorIndex++;
                     }
                 }
                 sb.append("</html>");
                 btnAction.setText(sb.toString());
-
                 offset--;
-                if (offset < 0) {
-                    offset = colors.length - 1;
-                }
+                if (offset < 0) offset = colors.length - 1;
             }
         });
         rainbowTimer.start(); 
@@ -81,12 +76,8 @@ public class DashboardFrame extends JFrame implements ActionListener {
         btnDisplay.addActionListener(this);
         btnExit.addActionListener(this);
 
-        add(btnAdd); 
-        add(btnRemove); 
-        add(btnAction); 
-        add(btnSearch); 
-        add(btnDisplay); 
-        add(btnExit);
+        add(btnAdd); add(btnRemove); add(btnAction); 
+        add(btnSearch); add(btnDisplay); add(btnExit);
     }
 
     @Override
@@ -97,12 +88,10 @@ public class DashboardFrame extends JFrame implements ActionListener {
             new SearchAccountFrame(wallet).setVisible(true);
         } else if (e.getSource() == btnRemove) {
             String id = JOptionPane.showInputDialog(this, "Enter Account ID to Remove:");
-            if (id != null && !id.trim().isEmpty()) {
-                if (wallet.removeAccount(id)) {
-                    JOptionPane.showMessageDialog(this, "Account removed successfully!");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error: Account not found!", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            if (id != null && wallet.removeAccount(id)) {
+                JOptionPane.showMessageDialog(this, "Account removed successfully!");
+            } else if (id != null) {
+                JOptionPane.showMessageDialog(this, "Account not found!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == btnAction) {
             String id = JOptionPane.showInputDialog(this, "Enter Account ID for Transaction:");
@@ -110,71 +99,54 @@ public class DashboardFrame extends JFrame implements ActionListener {
             
             if(acc != null) {
                 String[] options = {"Deposit", "Withdraw"};
-                int choice = JOptionPane.showOptionDialog(this, "Choose Action for Account " + id, "Transaction", 
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                int choice = JOptionPane.showOptionDialog(this, "Choose Action", "Transaction", 0, 1, null, options, options[0]);
                 
                 if(choice >= 0) {
                     String amountStr = JOptionPane.showInputDialog(this, "Enter Amount:");
                     if (amountStr != null) {
-try {
+                        try {
                             double amount = Double.parseDouble(amountStr);
-                            
-                           
                             if (amount <= 0) {
-                                JOptionPane.showMessageDialog(this, 
-                                    "Transaction Failed: Amount must be greater than zero!", 
-                                    "Invalid Amount", 
-                                    JOptionPane.ERROR_MESSAGE);
-                            } 
-                            // -------------------------------------------------
-                            else {
-                                if (choice == 0) {
-                                    // DEPOSIT
-                                    new Deposit("D" + System.currentTimeMillis(), amount).execute(acc);
-                                    JOptionPane.showMessageDialog(this, "Deposit Successful!\nNew Balance: $" + acc.getBalance());
-                                } else if (choice == 1) {
-                                    // WITHDRAWAL (WITH BALANCE CHECK)
-                                    if (acc.getBalance() >= amount) {
-                                        new Withdrawal("W" + System.currentTimeMillis(), amount).execute(acc);
-                                        JOptionPane.showMessageDialog(this, "Withdrawal Successful!\nNew Balance: $" + acc.getBalance());
-                                    } else {
-                                        JOptionPane.showMessageDialog(this, 
-                                            "Transaction Failed: Insufficient funds!\nCurrent Balance: $" + acc.getBalance(), 
-                                            "Declined", 
-                                            JOptionPane.ERROR_MESSAGE);
-                                    }
+                                JOptionPane.showMessageDialog(this, "Amount must be positive!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+
+                            if (choice == 0) {
+                                new Deposit("D" + System.currentTimeMillis(), amount).execute(acc);
+                                JOptionPane.showMessageDialog(this, "Deposit Successful!\nNew Balance: $" + acc.getBalance());
+                            } else if (choice == 1) {
+                                // CATCHING THE PROPAGATED EXCEPTION HERE
+                                try {
+                                    new Withdrawal("W" + System.currentTimeMillis(), amount).execute(acc);
+                                    JOptionPane.showMessageDialog(this, "Withdrawal Successful!\nNew Balance: $" + acc.getBalance());
+                                } catch (InsufficientFundsException ex) {
+                                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Declined", JOptionPane.ERROR_MESSAGE);
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(this, "General Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                         } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(this, "Invalid amount entered. Please type a number.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Invalid amount entered.", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
-            } else {
-                if(id != null && !id.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Account not found.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            } else if(id != null && !id.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Account not found.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == btnDisplay) {
             if (wallet.getHead() == null) {
                 JOptionPane.showMessageDialog(this, "The wallet is currently empty.");
                 return;
             }
-            
             StringBuilder sb = new StringBuilder("--- All Accounts ---\n\n");
             Account curr = wallet.getHead();
             while (curr != null) {
                 sb.append(curr.toString()).append("\n\n");
                 curr = curr.next;
             }
-            
-            JTextArea textArea = new JTextArea(15, 35);
-            textArea.setText(sb.toString());
-            textArea.setEditable(false);
-            JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "All Accounts", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, new JScrollPane(new JTextArea(sb.toString())), "All Accounts", 1);
         } else if (e.getSource() == btnExit) {
             fileManager.saveWallet(wallet);
-            JOptionPane.showMessageDialog(this, "Data Saved Successfully. Goodbye!");
             System.exit(0);
         }
     }

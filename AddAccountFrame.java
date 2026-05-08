@@ -14,7 +14,7 @@ public class AddAccountFrame extends JFrame implements ActionListener {
 
         setTitle("Add New Account");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //so it doesn't kill the whole program.
         setLayout(new GridLayout(6, 2, 5, 5));
 
         // Creating UI Components

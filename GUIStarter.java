@@ -8,7 +8,7 @@ public static void main(String[] args) {
         //load data from the .ser file
         try {
             wallet = fileManager.loadWallet();
-        } catch (Exception e) { //TURKI PLEASE (im joking)
+        } catch (Exception e) { 
             
             wallet = new WalletManager();
         }

@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
-//main
+//main (no longer in use)
 public class WalletTester {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -1,0 +1,3 @@
+ID: W1778257135422 | Account: 101 | Type: Withdrawal | Amount: 500.0 | Status: Failed - Insufficient Funds
+ID: D1778257161760 | Account: 101 | Type: Deposit | Amount: 100.0 | Status: Success
+ID: W1778257167412 | Account: 101 | Type: Withdrawal | Amount: 200.0 | Status: Failed - Insufficient Funds
