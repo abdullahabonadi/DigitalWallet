@@ -13,11 +13,14 @@ public class Withdrawal extends Transaction implements Serializable {
                 acc.setBalance(acc.getBalance() - amount);
                 System.out.println("Transaction " + transactionID + ": Withdrew " + amount);
                 System.out.println("Your New Balance: " + acc.getBalance());
+                this.saveReceipt("Withdrawal", acc.getAccountId(), "Success");
             } else {
                 throw new InsufficientFundsException("Transaction " + transactionID + ": Failed. Insufficient funds to withdraw " + amount + ".");
             }
         } catch (InsufficientFundsException e) {
             System.out.println(e.getMessage());
+            this.saveReceipt("Withdrawal", acc.getAccountId(), "Failed - Insufficient Funds");
         }
+
     }
 }

@@ -17,5 +17,6 @@ public class Deposit extends Transaction implements Serializable {
         double newBalance = acc.getBalance() + amount;
         acc.setBalance(newBalance);
         System.out.println("Transaction " + transactionID + ": Deposited " + amount);
+        this.saveReceipt("Deposit", acc.getAccountId(), "Success");
     }
 }
