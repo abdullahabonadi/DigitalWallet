@@ -53,7 +53,7 @@ public class WalletManager implements Serializable{
     }
 
     public void displayAll() {
-        if (count == 0) {
+        if (head == null) {
             System.out.println("The wallet is currently empty.");
             return;
         }
