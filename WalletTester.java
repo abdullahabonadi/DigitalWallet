@@ -191,7 +191,7 @@ public class WalletTester {
                                 int amountToTransfer = scanner.nextInt();
                                 scanner.nextLine();
                                 if(amountToTransfer <= accountToTransact.getBalance()) {
-                                    Account transferTo = wallet.searchAccount(transferId, 0);
+                                    Account transferTo = wallet.searchAccount(transferId, wallet.getHead());
                                     if(transferTo == null){
                                         System.out.println("No account has that Id!");
                                     }
