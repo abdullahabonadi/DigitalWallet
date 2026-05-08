@@ -4,7 +4,19 @@ import java.util.Scanner;
 public class WalletTester {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        WalletManager wallet = new WalletManager(100); // Set wallet capacity to 100
+        FileManager fileManager = new FileManager(); // new File class
+        WalletManager wallet;
+
+        try {
+                wallet = fileManager.loadWallet();
+                System.out.println("Data loaded successfully from file.");
+            } catch (FileNotFoundException e) {
+                System.out.println("No existing wallet found... Creating a new one.");
+                wallet = new WalletManager();
+            } catch (Exception e) {
+                System.out.println("Error loading wallet: " + e.getMessage());
+                wallet = new WalletManager();
+        }
         int choice;
 
         do {
