@@ -1,4 +1,6 @@
-public abstract class Transaction
+import java.io.Serializable;
+
+public abstract class Transaction implements Serializable
     //Abstract class for financial operations
 {
     protected String transactionID;
