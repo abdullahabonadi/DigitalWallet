@@ -1,4 +1,5 @@
-public class WalletManager {
+import java.io.Serializable;
+public class WalletManager implements Serializable{
     //(Aggregation).
     private Account[] accounts;
     private int count;
