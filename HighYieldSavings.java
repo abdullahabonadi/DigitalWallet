@@ -1,4 +1,6 @@
-public class HighYieldSavings extends SavingsAccount implements Taxable
+import java.io.Serializable;
+
+public class HighYieldSavings extends SavingsAccount implements Taxable, Serializable
     //Level 2 Subclass for high yielding accounts.
 {
     private double minimumBalance;
