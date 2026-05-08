@@ -289,7 +289,7 @@ public class WalletTester {
                     String searchId = scanner.nextLine();
 
                     // Call the recursive search starting at index 0
-                    Account foundAccount = wallet.searchAccount(searchId, 0);
+                    Account foundAccount = wallet.searchAccount(searchId, wallet.getHead());
 
                     if (foundAccount != null) {
                         System.out.println("\nAccount Found:");
