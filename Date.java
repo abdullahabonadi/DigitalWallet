@@ -1,4 +1,5 @@
-public class Date
+import java.io.Serializable;
+public class Date implements Serializable
 //Composition.
 {
 private int day;
