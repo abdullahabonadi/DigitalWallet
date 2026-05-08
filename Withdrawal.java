@@ -1,4 +1,6 @@
-public class Withdrawal extends Transaction
+import java.io.Serializable;
+
+public class Withdrawal extends Transaction implements Serializable
         //Level 1 Supclass for financial operations
 {
     public Withdrawal(String id, double amount){
