@@ -8,12 +8,11 @@ public class WalletManager implements Serializable{
     }
 
     public boolean addAccount(Account acc) {
-        if (count < accounts.length) {
-            accounts[count] = acc;
-            count++;
-            return true;
-        }
-        return false; // Array is full
+        if (acc == null) return false;
+        // Linked List insertion at the front
+        acc.next = head;
+        head = acc;
+        return true;
     }
 
     public boolean removeAccount(String id) {
