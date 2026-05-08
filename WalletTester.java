@@ -164,13 +164,19 @@ public class WalletTester {
                         //financial operations and transactions menu
                         switch (typeOfTransaction){
                             //deposit
+                            // deposit
                             case 1:
-                                System.out.print("Enter the amount to deposit:");
+                                System.out.print("Enter the amount to deposit: ");
                                 int amountToDeposit = scanner.nextInt();
                                 scanner.nextLine();
                                 Deposit depositTransaction = new Deposit(accountToTransact.getAccountId(), amountToDeposit);
-                                depositTransaction.execute(accountToTransact);
-                                System.out.println("Your New Balance: " + accountToTransact.getBalance());
+
+                                try {
+                                    depositTransaction.execute(accountToTransact);
+                                    System.out.println("Your New Balance: " + accountToTransact.getBalance());
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println("Error: " + e.getMessage());
+                                }
                                 break;
 
                             //withdrawal
