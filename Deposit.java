@@ -1,4 +1,5 @@
-public class Deposit extends Transaction
+import java.io.Serializable;
+public class Deposit extends Transaction implements Serializable
     //Level 1 Supclass for financial operations
 {
 public Deposit(String id, double amount){
