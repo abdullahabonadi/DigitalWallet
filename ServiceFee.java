@@ -1,4 +1,6 @@
-public class ServiceFee implements Taxable {
+import java.io.Serializable;
+
+public class ServiceFee implements Taxable , Serializable {
     //class for adding service fees
     private String feeName;
     private double amount;
