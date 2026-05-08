@@ -3,9 +3,8 @@ public class WalletManager implements Serializable{
     //(Aggregation).
     private Account head;
 
-    public WalletManager(int capacity) {
-        accounts = new Account[capacity];
-        count = 0;
+    public WalletManager(){
+        this.head = null;
     }
 
     public boolean addAccount(Account acc) {
