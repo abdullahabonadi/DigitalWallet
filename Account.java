@@ -1,4 +1,5 @@
-public abstract class Account 
+import java.io.Serializable;
+public abstract class Account implements Serializable
 //Abstract Superclass for all wallet types.
 {
     protected String accountId;
