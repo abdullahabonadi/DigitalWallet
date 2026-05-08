@@ -1,4 +1,6 @@
-public class SavingsAccount extends Account
+import java.io.Serializable;
+
+public class SavingsAccount extends Account implements Serializable
     //Level 1 Supclass a standard savings account with interest.
 {
     private double interestRate;
