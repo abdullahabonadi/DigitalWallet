@@ -19,18 +19,23 @@ public class WalletManager implements Serializable{
     }
 
     public boolean removeAccount(String id) {
-        for (int i = 0; i < count; i++) {
-            if (accounts[i].getAccountId().equals(id)) {
-                // Shift elements to the left to fill the gap and keep the array contiguous
-                for (int j = i; j < count - 1; j++) {
-                    accounts[j] = accounts[j + 1];
-                }
-                accounts[count - 1] = null;
-                count--;
+        if (head == null) return false;
+
+        //removing the first account
+        if (head.getAccountId().equals(id)) {
+            head = head.next;
+            return true;
+        }
+
+        Account curr = head;
+        while (curr.next != null) {
+            if (curr.next.getAccountId().equals(id)) {
+                curr.next = curr.next.next; // Bypass the account to remove it
                 return true;
             }
+            curr = curr.next;
         }
-        return false; // Account not found
+        return false;
     }
 
     // Recursive search method
