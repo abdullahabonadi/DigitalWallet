@@ -44,9 +44,9 @@ public class WalletManager implements Serializable{
         if (current == null) {
             return null;
         }
-        // Base case 2: We found the matching account ID
-        if (accounts[index].getAccountId().equals(id)) {
-            return accounts[index];
+        // The ID matches the current account
+        if (current.getAccountId().equals(id)) {
+            return current;
         }
         // Recursive step: Call the method again, moving to the next index
         return searchAccount(id, index + 1);
