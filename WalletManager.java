@@ -39,9 +39,9 @@ public class WalletManager implements Serializable{
     }
 
     // Recursive search method
-    public Account searchAccount(String id, int index) {
-        // Base case 1: We searched all active accounts and didn't find it
-        if (index >= count) {
+    public Account searchAccount(String id, Account current) {
+        //End of list reached
+        if (current == null) {
             return null;
         }
         // Base case 2: We found the matching account ID
