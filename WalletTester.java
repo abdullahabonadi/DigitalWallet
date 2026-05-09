@@ -1,8 +1,9 @@
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 //main (no longer in use)
 public class WalletTester {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InsufficientFundsException {
         Scanner scanner = new Scanner(System.in);
         FileManager fileManager = new FileManager(); // new File class
         WalletManager wallet;
@@ -17,7 +18,7 @@ public class WalletTester {
                 System.out.println("Error loading wallet: " + e.getMessage());
                 wallet = new WalletManager();
         }
-        int choice;
+        int choice = 7;
         do {
             System.out.println("\n=== Digital Wallet Management System ===");
             System.out.println("1. Add a new Account");
@@ -28,14 +29,22 @@ public class WalletTester {
             System.out.println("6. Display All Accounts");
             System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
-
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character left by nextInt()
-
+            boolean check = true;
+            while (check){ //a loop to force choosing a correct input
+                try {
+                    choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character left by nextInt()
+                    check = false;
+                } catch (InputMismatchException e) {
+                    System.out.print("Invalid input try choosing form 1-7 again: ");
+                    scanner.nextLine();
+                }
+            }
 
 
 
             //main menu
+            try{
             switch (choice) {
                 case 1:
                     System.out.print("Enter Account type\n1.Savings Account\n2.Investment Account\nChoose:");
@@ -163,7 +172,6 @@ public class WalletTester {
                         scanner.nextLine();
                         //financial operations and transactions menu
                         switch (typeOfTransaction){
-                            //deposit
                             // deposit
                             case 1:
                                 System.out.print("Enter the amount to deposit: ");
@@ -184,8 +192,13 @@ public class WalletTester {
                                 System.out.print("Enter the amount to withdrawal:");
                                 int amountToWithdrawal = scanner.nextInt();
                                 scanner.nextLine();
-                                Withdrawal withdrawalTransaction = new Withdrawal(accountToTransact.getAccountId(), amountToWithdrawal);
-                                withdrawalTransaction.execute(accountToTransact);
+                                try {
+                                    Withdrawal withdrawalTransaction = new Withdrawal(accountToTransact.getAccountId(), amountToWithdrawal);
+                                    withdrawalTransaction.execute(accountToTransact);
+                                }catch (InsufficientFundsException e){
+                                    System.out.println(e.getMessage());
+                                }
+
                                 break;
 
                             //transfer
@@ -195,16 +208,15 @@ public class WalletTester {
                                 System.out.print("Enter the amount to transfer:");
                                 int amountToTransfer = scanner.nextInt();
                                 scanner.nextLine();
-                                if(amountToTransfer <= accountToTransact.getBalance()) {
-                                    Account transferTo = wallet.searchAccount(transferId, wallet.getHead());
-                                    if(transferTo == null){
-                                        System.out.println("No account has that Id!");
-                                    }
-                                    else {
-                                        //transfer from
+                                Account transferTo = wallet.searchAccount(transferId, wallet.getHead());
+                                if(transferTo == null){
+                                    System.out.println("No account has that Id!");
+                                }
+                                else {
+                                    //transfer from
+                                    try {
                                         Withdrawal withdrawalTransfer = new Withdrawal(accountToTransact.getAccountId(), amountToTransfer);
                                         withdrawalTransfer.execute(accountToTransact);
-
                                         //transfer to
                                         Deposit depositTransfer = new Deposit(transferTo.getAccountId(), amountToTransfer);
                                         depositTransfer.execute(transferTo);
@@ -216,10 +228,13 @@ public class WalletTester {
                                             accountToTransact.setBalance(0);
                                         }else
                                             accountToTransact.setBalance(accountToTransact.getBalance() - serviceFee.calculateTax());
+                                        }
+                                    catch (InsufficientFundsException e){
+                                        System.out.println(e.getMessage());
                                     }
                                 }
-                                else
-                                    System.out.println("Sorry! not enough funds for this transaction");
+
+
                                 break;
 
                             default:
@@ -317,6 +332,10 @@ public class WalletTester {
 
                 default:
                     System.out.println("Invalid input. Please select a number from 1 to 7.");
+            }
+        }catch(InputMismatchException e){ // handling wrong inputs
+                System.out.println("Wrong input try Entering a number!!");
+                scanner.nextLine();
             }
         } while (choice != 7);
 
