@@ -17,7 +17,7 @@ public class Withdrawal extends Transaction implements Serializable {
             this.saveReceipt("Withdrawal", acc.getAccountId(), "Success");
         } else {
             this.saveReceipt("Withdrawal", acc.getAccountId(), "Failed - Insufficient Funds");
-            throw new InsufficientFundsException("Transaction " + transactionID + ": Failed. Insufficient funds to withdraw " + amount + ".");
+            throw new InsufficientFundsException("Transaction " + acc.getAccountId() + ": Failed. Insufficient funds to withdraw " + amount + ".");
         }
     }
 }
